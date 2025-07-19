@@ -35,7 +35,7 @@ public interface GiftSwagger {
                     @ApiResponse(responseCode = "401", description = "인증 실패")
             }
     )
-    ResponseEntity<?> findAllGifts(Principal principal);
+    ResponseEntity<?> findAllGifts(@Parameter(description = "회원 ID") Long memberId);
 
     @Operation(
             summary = "특별 선물 목록 조회",
