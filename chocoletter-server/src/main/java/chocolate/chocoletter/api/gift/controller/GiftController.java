@@ -9,6 +9,7 @@ import chocolate.chocoletter.api.gift.service.GiftService;
 import chocolate.chocoletter.common.annotation.DecryptedId;
 import jakarta.validation.Valid;
 import java.security.Principal;
+import org.springframework.web.bind.annotation.RequestParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,7 @@ public class GiftController implements GiftSwagger {
     private final GiftService giftService;
 
     @GetMapping("/all")
-    public ResponseEntity<?> findAllGifts(Principal principal) {
-        // 로그인 한 member를 가져오기
-        Long memberId = Long.parseLong(principal.getName());
+    public ResponseEntity<?> findAllGifts(@RequestParam Long memberId) {
         GiftsResponseDto gifts = giftService.findAllGifts(memberId);
         return ResponseEntity.ok(gifts);
     }
