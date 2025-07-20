@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,9 +20,7 @@ public class ChatRoomController implements ChatRoomSwagger {
     private final ChatRoomService chatRoomService;
 
     @GetMapping("/all")
-    public ResponseEntity<?> findMyChatRooms(Principal principal) {
-        // 로그인 한 멤버 찾아오기
-        Long memberId = Long.parseLong(principal.getName());
+    public ResponseEntity<?> findMyChatRooms(@RequestParam Long memberId) {
         ChatRoomsResponseDto myChatRooms = chatRoomService.findMyChatRooms(memberId);
         return ResponseEntity.ok(myChatRooms);
     }

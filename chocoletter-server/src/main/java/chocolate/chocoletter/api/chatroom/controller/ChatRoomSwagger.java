@@ -10,12 +10,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.security.Principal;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface ChatRoomSwagger {
 
     @Operation(
             summary = "채팅방 조회",
-            description = "내가 속한 채팅방리스트를 조회합니다. 로그인한 사용자의 ID가 필요합니다."
+            description = "내가 속한 채팅방리스트를 조회합니다. 멤버 ID가 필요합니다."
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -28,7 +29,7 @@ public interface ChatRoomSwagger {
             @ApiResponse(responseCode = "401", description = "인증되지 않았습니다."),
             @ApiResponse(responseCode = "500", description = "Id를 암호화하다 실패했습니다.")
     })
-    ResponseEntity<?> findMyChatRooms(Principal principal);
+    ResponseEntity<?> findMyChatRooms(@RequestParam Long memberId);
 
     @Operation(
             summary = "채팅방에서 조회",
